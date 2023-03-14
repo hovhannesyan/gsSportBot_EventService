@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package event;
+
+option go_package = "./pkg/pb";
+
+service Event {
+  rpc AddDiscipline(AddDisciplineRequest) returns (AddDisciplineResponse) {}
+  rpc DeleteDiscipline(DeleteDisciplineRequest) returns (DeleteDisciplineResponse) {}
+  rpc GetDisciplines(GetDisciplinesRequest) returns (GetDisciplinesResponse) {}
+
+  rpc AddEvent(AddEventRequest) returns (AddEventResponse) {}
+  rpc DeleteEvent(DeleteEventRequest) returns (DeleteEventResponse) {}
+  rpc GetEvents(GetEventsRequest) returns (GetEventsResponse) {}
+}
+
+message AddDisciplineRequest {
+  string name = 1;
+}
+
+message AddDisciplineResponse {
+  int64 id = 1;
+}
+
+message DeleteDisciplineRequest {
+  int64 id = 1;
+}
+
+message DeleteDisciplineResponse {
+  bool success = 1;
+}
+
+message GetDisciplinesRequest {
+  repeated int64 id = 1;
+}
+
+message DisciplineData {
+  int64 id = 1;
+  string name = 2;
+}
+
+message GetDisciplinesResponse {
+  repeated DisciplineData disciplines = 1;
+}
+
+message AddEventRequest {
+  int64 discipline_id = 1;
+  string place = 2;
+  string date = 3;
+  string startTime = 4;
+  string endTime = 5;
+  string price = 6;
+  string limit = 7;
+  string description = 8;
+}
+
+message AddEventResponse {
+  int64 id = 1;
+}
+
+message DeleteEventRequest {
+  int64 id = 1;
+}
+
+message DeleteEventResponse {
+  bool success = 1;
+}
+
+message EventData {
+  int64 id = 1;
+  string discipline_name = 2;
+  string place = 3;
+  string date = 4;
+  string startTime = 5;
+  string endTime = 6;
+  string price = 7;
+  string limit = 8;
+  string description = 9;
+}
+
+message GetEventsRequest {
+  repeated int64 discipline_id = 1;
+}
+
+message GetEventsResponse {
+  repeated EventData events = 1;
+}
+
